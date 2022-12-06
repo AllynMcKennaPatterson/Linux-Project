@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<style>
+.dropbtn {
+  background-color: #04AA6D;
+  color: yellow;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+  <body>
+
+    <h2>Crypto Value Monitor</h2>
+
+
+    <p>How Much money have you lost?</p>
+<div class="dropdown">
+  <button class="dropbtn">Dropdown</button>
+  <div class="dropdown-content">
+
+    <button  id='coin' onclick="sendToServer()">BTC</button>
+    
+<button  id='coin' onclick="document.getElementById('coin').innerHTML = 'ETH';sendToServer();document.getElementById('coin').innerHTML = 'BTC'">ETH</button>
+ 
+   <button  id='coin' onclick="document.getElementById('coin').innerHTML =    'USDT';sendToServer();document.getElementById('coin').innerHTML = 'BTC'">USDT</button>
+   
+ <button  id='coin' onclick="document.getElementById('coin').innerHTML = 'BNB';sendToServer();document.getElementById('coin').innerHTML = 'BTC'">BNB</button>
+     
+<button  id='coin' onclick="document.getElementById('coin').innerHTML = 'USDC';sendToServer();document.getElementById('coin').innerHTML = 'BTC'">USDC</button>
+   
+<button  id='coin' onclick="document.getElementById('coin').innerHTML = 'BUSD';sendToServer();document.getElementById('coin').innerHTML = 'BTC'">BUSD</button>
+   
+<button  id='coin' onclick="document.getElementById('coin').innerHTML = 'XRP';sendToServer();document.getElementById('coin').innerHTML = 'BTC'">XRP</button>
+    
+<button  id='coin' onclick="document.getElementById('coin').innerHTML = 'ADA';sendToServer();document.getElementById('coin').innerHTML = 'BTC'">ADA</button>
+   
+<button  id='coin' onclick="document.getElementById('coin').innerHTML = 'MATIC';sendToServer();document.getElementById('coin').innerHTML = 'BTC'">MATIC</button>
+  </div>
+
+    
+
+    <textarea style="border: 1px solid black; width: 90%; height: 200px;" name="scriptOutput" id='scriptOutput'></textarea>
+
+
+
+
+    <script>
+      async function sendToServer(){
+	
+          let response = await fetch('http://localhost:3000/runScript', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                scriptInput:  document.getElementById("coin").innerHTML,
+                scriptOutput: "",
+                moreStuff: ""
+            })
+        });
+        response = await response.json();
+        document.getElementById("scriptOutput").innerHTML = response.scriptOutput;
+      }
+
+    </script>
+
+
+  </body>
+</html>
