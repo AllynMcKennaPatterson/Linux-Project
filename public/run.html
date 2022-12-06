@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <body>
+
+    <h2>Sample HTML Page</h2>
+
+    <p>Type or paste script to run:</p>
+
+    <textarea  style="width: 90%; height: 200px;" type="text" name="scriptInput" id="scriptInput"></textarea>
+    <br>
+
+    <div onclick="sendToServer()" style="border: 1px solid black; margin: 10px; width: 150px; height: 40px;">Click to send to server</div>
+
+    <textarea style="border: 1px solid black; width: 90%; height: 200px;" name="scriptOutput" id='scriptOutput'></textarea>
+
+    <script>
+      async function sendToServer(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("scriptOutput").innerHTML = JSON.parse(this.responseText).scriptOutput;
+          }
+        };
+        xhttp.open("POST", "/runScript", true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        var myObj = {
+          scriptInput: "",
+          scriptOutput: "",
+          moreStuff: ""
+        };
+        myObj.scriptInput = document.getElementById("scriptInput").value;
+        xhttp.send(JSON.stringify(myObj));
+      }
+    </script>
+  </body>
+</html>
