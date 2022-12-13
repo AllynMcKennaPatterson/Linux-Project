@@ -1,1 +1,1 @@
-cd ..
+bash ./Script/webscrape.sh

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<style>
+.dropbtn {
+  background-color: #04AA6D;
+  color: yellow;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+  <body>
+
+    <h2>Crypto Value Monitor</h2>
+
+
+    <p>How Much money have you lost?</p>
+    <div class="dropdown">
+        <button class="dropbtn">Select Coin</button>
+        <div class="dropdown-content">
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">BTC</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">ETH</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">USDT</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">BNB</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">USDC</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">BUSD</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">XRP</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">ADA</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">MATIC</button>
+        </div>
+
+
+
+        <textarea style="border: 1px solid black; width: 90%; height: 200px;" name="scriptOutput" id='scriptOutput'></textarea>
+        <h3>The coin:</h3>
+        <p id="coinSelected"></p>
+        <img src="notStonks.png" style="width:500px"/>
+
+
+
+        <script>
+
+            function displayCoin(button){
+                let coin = button;
+                window.location.search +='&' + coin 
+                document.getElementById("coinSelected").innerHTML = coin;
+                
+            }
+
+        </script>
+
+
+</body>
+</html>

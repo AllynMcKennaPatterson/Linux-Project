@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="./stylesheets/style.css" />
+    </head>
+    <body>
+
+        <h1 class="title">Cryto Value Monitor</h1>
+
+        <img id="img1" src="./images/stressedMan.jpg" style="width:280px" />
+
+        <h3 id="message">View the current value of a crypto coin</h3>
+
+        <div id="buttons">
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">BTC</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">ETH</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">USDT</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">BNB</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">USDC</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">BUSD</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">XRP</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">ADA</button>
+
+            <button id='coinButton' onclick="displayCoin(this.innerHTML)">MATIC</button>
+        </div>
+        <textarea class="topBox" style="width: 50%; height: 200px;" type="text" name="scriptInput" id="scriptInput" readonly></textarea>
+        <br>
+
+        <div id="scriptButton" onclick="sendToServer()" style="border: 1px solid black; margin: 10px; width: 150px; height: 40px;">Click view coin value</div>
+
+        <textarea class="bottomBox" style="border: 1px solid black; width: 50%; height: 200px;" name="scriptOutput" id='scriptOutput' readonly></textarea>
+        <img id="img3" src="./images/notStonks.png" style="width:450px" />
+        <script>
+            async function sendToServer(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("scriptOutput").innerHTML = JSON.parse(this.responseText).scriptOutput;
+            }
+            };
+            xhttp.open("POST", "/runScript", true);
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            var myObj = {
+            scriptInput: "",
+            scriptOutput: "",
+            moreStuff: ""
+            };
+            myObj.scriptInput = document.getElementById("scriptInput").value;
+            xhttp.send(JSON.stringify(myObj));
+            }
+
+            function displayCoin(button){
+            let coin = button.toLowerCase();
+            document.getElementById("scriptInput").innerHTML = coin;
+
+            }
+        </script>
+    </body>
+</html>
